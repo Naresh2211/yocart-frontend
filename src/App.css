@@ -1,38 +1,1756 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap");
+
+/* ===================================================== */
+/* ====================== RESET ======================== */
+/* ===================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #f4f6f8;
+  color: #222;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* ===================================================== */
+/* =================== PAGE LAYOUT ===================== */
+/* ===================================================== */
+
+.page {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 100px 24px 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h1,
+h2 {
+  font-family: "Oswald", sans-serif;
+  font-size: 32px;
+  letter-spacing: 1.5px;
+  margin-bottom: 30px;
+}
+
+/* ===================================================== */
+/* ===================== NAVBAR ======================== */
+/* ===================================================== */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 18px 50px;
+  background-color: #1e1e1e;
+  border-bottom: 3px solid #d32f2f;
+  font-family: "Oswald", sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar a {
+  font-size: 20px;
+  letter-spacing: 1.5px;
+  margin-right: 70px;
+  text-decoration: none;
+  color: #d61515;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.navbar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background-color: #ff0000;
+  transition: width 0.25s ease;
+}
+
+.navbar a:hover {
+  color: #ff0000;
+}
+
+.navbar a:hover::after {
+  width: 100%;
+}
+
+/* ACTIVE NAV LINK */
+.navbar a.active::after {
+  width: 100%;
+  background-color: #ffffff;
+}
+
+
+/* LOGOUT */
+.logout-btn {
+  margin-left: auto;
+  font-size: 16px;
+  padding: 8px 18px;
+  background-color: #d61515;
+  color: #000000;
+  border: 1px solid #1c1c1c;
+  border-radius: 7px;
+  cursor: pointer;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 1px;
+}
+
+.logout-btn:hover {
+  background-color: #000000;
+  color: #ff0000;
+  border-color: #ff0000;
+}
+
+/* ===================================================== */
+/* ==================== PRODUCTS ======================= */
+/* ===================================================== */
+
+/* CARD */
+.product-card {
+  background-color: #000000;
+  border: 1px solid #333;
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+/* LAYOUT – BIGGER CARD */
+.product-card.products-layout {
+  max-width: 1200px;
+  height: 460px;
+  margin: 0 auto 40px;
+  padding: 40px;
+  display: flex;
+  gap: 64px;
+
+  /* 🔥 CRITICAL FIX */
+  align-items: stretch;
+}
+
+/* LEFT COLUMN */
+.product-left {
+  width: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  /* 🔥 CRITICAL FIX */
+  height: 100%;
+}
+
+/* IMAGE */
+.product-image {
+  width: 260px;
+  height: 240px;
+  object-fit: contain;
+  margin-bottom: 22px;
+}
+
+/* STOCK */
+.stock {
+  font-size: 17px;
+  margin-bottom: 18px;
+}
+
+.in-stock {
+  color: #55ff00;
+}
+
+.out-stock {
+  color: #ff0000;
+}
+
+/* USER + ADMIN QUANTITY / ADD STOCK (SAME SLOT) */
+.user-qty {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 10px;
+  color: #ffffff;
+}
+
+.user-qty button {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 6px 16px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.user-qty strong {
+  font-size: 18px;
+}
+
+/* RIGHT COLUMN */
+.product-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  /* 🔥 CRITICAL FIX */
+  height: 100%;
+}
+
+/* PRODUCT NAME */
+.product-title {
+  font-family: "Oswald", sans-serif;
+  font-size: 34px;
+  margin-bottom: 10px;
+  color: #ff0000;
+}
+
+.product-color {
+  font-size: 18px;
+  color: #ffffff;
+}
+
+/* SPECS */
+.product-specs {
+  font-size: 17px;
+  line-height: 2;
+  margin-bottom: 26px;
+  color: #ffffff;
+}
+
+.product-specs div {
+  color: #ffffff;
+}
+
+/* PRICE */
+.product-price-lg {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  color: #d41e1e;
+}
+
+/* ADD TO CART / UPDATE STOCK (SAME SLOT) */
+.add-cart-btn {
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 14px 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 1px;
+  font-size: 17px;
+}
+
+.add-cart-btn:hover {
+  color: #ff0000;
+  border-color: #ff0000;
+}
+
+.add-cart-btn.small {
+  width: 200px;
+}
+
+.add-cart-btn.wide {
+  width: 220px;
+}
+
+/* DISABLED */
+.add-cart-btn:disabled {
+  background-color: #444;
+  border-color: #444;
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* ================= ADMIN / USER ACTION ALIGNMENT ================= */
+
+/* ADMIN ACTIONS */
+.admin-actions {
+  margin-top: auto;            /* 🔥 PIN TO BOTTOM */
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ADMIN STOCK ROW */
+.admin-stock-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #ffffff;
+}
+
+.admin-stock-row button {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 6px 16px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.admin-stock-row span {
+  min-width: 36px;
+  text-align: center;
+}
+
+/* USER ACTIONS (QTY + ADD TO CART SAME BASELINE) */
+.user-actions {
+  margin-top: auto;            /* 🔥 SAME SLOT AS ADMIN */
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+/* ===================================================== */
+/* ============ ADMIN ORDERS – REFUND STATUS ============ */
+/* ===================================================== */
+
+.admin-order-card .refund-status {
+  margin-top: 12px;
+  font-weight: 600;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 0.8px;
+}
+/* ================= ADMIN ORDER – STATUS COLORS ================= */
+
+/* Returned → Purple */
+.admin-order-card .status-RETURNED {
+  color: #9c27b0;   /* violet */
+}
+
+/* Replacement Delivered → Blue */
+.admin-order-card .status-REPLACEMENT_DELIVERED {
+  color: #2196f3;   /* blue */
+}
+
+/* Payment Refunded → Green */
+.admin-order-card .payment-status-REFUNDED {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.admin-order-card .payment-upi {
+  color: #e91e63;   /* pink */
+  font-weight: 600;
+}
+
+.admin-order-card .payment-cod {
+  color: #6b8e23;   /* grey-green */
+  font-weight: 600;
+}
+
+.admin-order-card .payment-card {
+  color: #1e3a8a;   /* medium dark blue */
+  font-weight: 600;
+}
+
+/* Return Completed → Green */
+.admin-order-card .return-COMPLETED {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.admin-order-card .return-reason {
+  color: #f44336;   /* red */
+  font-weight: 600;
+}
+
+
+/* ===================================================== */
+/* ===== ADMIN ORDERS – REFUND STATUS OVERRIDE ========= */
+/* ===================================================== */
+
+/* Default admin refund text (keep label white) */
+.admin-order-card .refund-status {
+  color: #ffffff;
+}
+
+/* Pending refund */
+.admin-order-card .refund-PENDING {
+  color: #ff9800; /* 🟡 yellow */
+}
+
+/* Completed refund */
+.admin-order-card .refund-REFUNDED {
+  color: #4caf50; /* 🟢 green */
+}
+
+/* Payment Pending → Yellow */
+.admin-order-card .payment-status-PENDING {
+  color: #ff9800;   /* yellow-orange */
+  font-weight: 600;
+}
+
+/* Payment Paid → Success Green */
+.admin-order-card .payment-status-PAID {
+  color: #2e7d32;   /* darker success green */
+  font-weight: 600;
+}
+
+
+/* ===================================================== */
+/* ============ ADMIN REFUNDS – STATUS COLORS =========== */
+/* ===================================================== */
+
+/* Only color the VALUE, not "Status:" */
+.admin-refund-card .status-REQUESTED {
+  color: #ff9800; /* yellow */
+}
+
+.admin-refund-card .status-REFUNDED {
+  color: #4caf50; /* green */
+}
+
+.admin-refund-card .status-FAILED {
+  color: #f44336; /* red */
+}
+
+/* Ensure "Status:" label stays white */
+.admin-refund-card .status-REQUESTED strong,
+.admin-refund-card .status-REFUNDED strong,
+.admin-refund-card .status-FAILED strong {
+  color: #ffffff;
+}
+
+
+
+/* ===================================================== */
+/* ===================== CART ========================== */
+/* ===================================================== */
+
+/* CART CARD – SAME AS PRODUCT CARD */
+.cart-card {
+  background-color: #000000;        /* 🖤 black */
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  color: #ffffff;                  /* ⚪ white text */
+}
+
+/* CART ROW */
+.cart-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LEFT SIDE */
+.cart-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: #ffffff;
+}
+
+/* CHECKBOX – RED */
+.cart-left input[type="checkbox"] {
+  accent-color: #ff0000;            /* 🔴 red */
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* PRODUCT INFO */
+.cart-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #ffffff;
+}
+
+.cart-product-name {
+  font-family: "Oswald", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+}
+
+/* QUANTITY CONTROLS */
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.qty-controls button {
+  width: 25px;
+  height: 25px;
+  font-size: 18px;
+  border-radius: 6px;
+  border: 1px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.qty-controls button:hover {
+  border-color: #ff0000;
+  color: #ff0000;
+}
+
+.qty-value {
+  font-size: 13px;
+  min-width: 24px;
+  text-align: center;
+  color: #ffffff;
+}
+
+/* REMOVE BUTTON */
+.remove-btn {
+  background-color: #ff0000;
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background-color: #cc0000;
+}
+
+/* CHECKOUT BUTTON – DISTINCT COLOR */
+.checkout-btn {
+  margin-top: 30px;
+  padding: 14px 26px;
+  font-size: 18px;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 1px;
+  background-color: #fb5800;        /* 🟠 orange */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.checkout-btn:hover {
+  color: #000000;
+  background-color: #fb5800;
+}
+
+/* EMPTY CART */
+.empty {
+  text-align: center;
+  color: #bbbbbb;
+  margin-top: 40px;
+  font-size: 16px;
+}
+
+/* ===================================================== */
+/* ===================== ORDERS ========================= */
+/* ===================================================== */
+
+.order-card {
+  background-color: #000000;
+  border: 1px solid #333;
+  padding: 28px;
+  margin-bottom: 28px;
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+/* GENERAL PARAGRAPH SPACING */
+.order-card p {
+  margin: 10px 0;
+  color: #ffffff;
+}
+
+/* STRONG TEXT */
+.order-card strong {
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+/* ================= ORDER META SPACING ================= */
+
+.order-card > p {
+  margin-bottom: 14px;
+}
+
+/* ================= STATUS COLORS ================= */
+
+.order-card .status-PLACED {
+  color: #ff9800;
+}
+
+.order-card .status-CONFIRMED {
+  color: #2196f3;
+}
+
+.order-card .status-SHIPPED {
+  color: #9c27b0;
+}
+
+.order-card .status-DELIVERED {
+  color: #4caf50;
+}
+
+.order-card .status-CANCELLED {
+  color: #f44336;
+}
+
+/* ================= ORDER ITEMS ================= */
+
+.order-items {
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid #ff0000; /* 🔴 RED LINE */
+}
+
+.order-item {
+  margin-top: 8px;
+  padding-left: 8px;
+}
+
+/* ================= TOTAL ================= */
+
+.order-total {
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid #ff0000; /* 🔴 RED LINE */
+  font-size: 18px;
+}
+
+
+/* Returned → Violet */
+.order-card .status-RETURNED {
+  color: #9c27b0;
+}
+
+/* Replacement Delivered → Blue */
+.order-card .status-REPLACEMENT_DELIVERED {
+  color: #2196f3;
+}
+
+/* Paid → Dark Green */
+.order-card .payment-status-PAID {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+/* Pending → Yellow */
+.order-card .payment-status-PENDING {
+  color: #ff9800;
+  font-weight: 600;
+}
+
+/* Refunded → Light Green */
+.order-card .payment-status-REFUNDED {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+/* Return Completed → Green */
+.order-card .return-COMPLETED {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.order-card .return-reason {
+  color: #f44336;
+  font-weight: 600;
+}
+
+.order-card .payment-upi {
+  color: #e91e63; /* pink */
+  font-weight: 600;
+}
+
+.order-card .payment-cod {
+  color: #6b8e23; /* grey green */
+  font-weight: 600;
+}
+
+.order-card .payment-card {
+  color: #1e3a8a; /* dark blue */
+  font-weight: 600;
+}
+
+/* Replacement Delivered → Blue */
+.order-card .status-REPLACEMENT_DELIVERED {
+  color: #2196f3 !important;
+  font-weight: 600;
+}
+
+
+
+/* ================= PAYMENT / REFUND ================= */
+
+.order-card p + p {
+  margin-top: 12px;
+}
+
+.order-card .refund-status {
+  margin-top: 12px;
+  font-weight: 600;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 0.8px;
+  /* ❗ NO COLOR HERE */
+}
+
+/* ===== USER REFUND COLORS ===== */
+
+/* Pending / Requested */
+.order-card .refund-PENDING,
+.order-card .refund-REQUESTED {
+  color: #ff9800; /* 🟡 yellow */
+}
+
+/* Completed */
+.order-card .refund-REFUNDED {
+  color: #4caf50; /* 🟢 green */
+}
+
+
+/* ================= ACTIONS ================= */
+
+.order-actions {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #ff0000; /* 🔴 RED LINE */
+}
+
+/* BASE BUTTON STYLE */
+.order-actions button {
+  margin-right: 12px;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+/* DEFAULT HOVER */
+.order-actions button:hover {
+  color: #ff0000;
+  border-color: #ff0000;
+}
+
+/* CANCEL / REFUND BUTTON (DESTRUCTIVE) */
+.order-actions > button {
+  border-color: #ff0000;
+  color: #ff0000;
+}
+
+.order-actions > button:hover {
+  background-color: #ff0000;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* ================= PAYMENT OPTIONS COLORS (SAFE) ================= */
+
+.order-actions p + button {
+  border-color: #719231;
+  color: #719231;
+}
+
+.order-actions p + button:hover {
+  background-color: #719231;
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.order-actions p + button + button {
+  border-color: #9636c3;
+  color: #9636c3;
+}
+
+.order-actions p + button + button:hover {
+  background-color: #9636c3;
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.order-actions p + button + button + button {
+  border-color: #3259cf;
+  color: #3259cf;
+}
+
+.order-actions p + button + button + button:hover {
+  background-color: #3259cf;
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+
+/* ================= PAYMENT METHOD DISPLAY COLORS ================= */
+
+.payment-cod {
+  color: #719231;
+  font-weight: 600;
+}
+
+.payment-upi {
+  color: #9636c3;
+  font-weight: 600;
+}
+
+.payment-card {
+  color: #3259cf;
+  font-weight: 600;
+}
+
+/* Optional: make label bold */
+.payment-status strong {
+  font-weight: 700;
+}
+
+
+
+/* ===================================================== */
+/* ============== ADMIN REFUND STATUS ================== */
+/* ===================================================== */
+
+/* Base refund text */
+.refund-status {
+  margin-top: 10px;
+  font-weight: 600;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 0.8px;
+}
+
+/* ---------------- PENDING (REQUESTED) ---------------- */
+/* Yellow / Orange */
+.refund-PENDING {
+  color: #ff9800;          /* 🟡 yellow-orange */
+}
+
+/* ---------------- COMPLETED (REFUNDED) ---------------- */
+/* Green */
+.refund-REFUNDED {
+  color: #4caf50;          /* 🟢 green */
+}
+
+/* ---------------- OPTIONAL (FUTURE SAFE) -------------- */
+/* If later you add FAILED refunds */
+.refund-FAILED {
+  color: #f44336;          /* 🔴 red */
+}
+
+
+/* ===================================================== */
+/* ========== RETURN / REPLACE (NEW ADDITION) =========== */
+/* ===================================================== */
+
+/* Dropdown (Reason select) */
+.order-actions select {
+  margin-top: 14px;
+  margin-right: 12px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ffffff;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.order-actions select:focus {
+  outline: none;
+  border-color: #ff0000;
+}
+
+/* Return button */
+.order-actions button.return-btn {
+  border-color: #9d00ff;
+  color: #9d00ff;
+}
+
+.order-actions button.return-btn:hover {
+  background-color: #9d00ff;
+  color: #ffffff;
+}
+
+/* Replacement button */
+.order-actions button.replace-btn {
+  border-color: #0088ff;
+  color: #0088ff;
+}
+
+.order-actions button.replace-btn:hover {
+  background-color: #0088ff;
+  color: #ffffff;
+}
+
+/* Return reason dropdown */
+.return-reason-select {
+  color: #d32f2f; /* red */
+  font-weight: 500;
+}
+
+/* Optional: style dropdown options (browser support varies) */
+.return-reason-select option {
+  color: #d32f2f;
+}
+
+
+
+/* ===================================================== */
+/* ===================== EMPTY ========================== */
+/* ===================================================== */
+
+.empty {
+  text-align: center;
+  color: #777;
+  margin-top: 40px;
+  font-size: 16px;
+}
+
+/* ===================================================== */
+/* ===================== LOGIN ========================= */
+/* ===================================================== */
+
+.login-card{
+  width: 100%;
+  max-width: 520px;
+  min-height: 530px;   /* 🔥 fixed visual height */
+  background-color: #ffffff;
+  padding: 90px;
+  border-radius: 12px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+
+}
+
+
+
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+
+  background: linear-gradient(
+    to bottom,
+    #111111 0%,
+    #2b0000 25%,
+    #7a1e00 55%,
+    #ff3b00 100%
+  );
+}
+
+
+.login-title {
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  font-size: 28px;
+  letter-spacing: 1.5px;
+  margin-bottom: 30px;
+}
+
+.login-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 18px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.login-input:focus {
+  border-color: #d32f2f;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 1px;
+  background-color: #d32f2f;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #b71c1c;
+}
+
+.login-btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.login-footer {
+  margin-top: 22px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.login-footer a {
+  color: #d32f2f;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ===================================================== */
+/* ==================== REGISTER ======================= */
+/* ===================================================== */
+
+
+.register-card {
+  width: 100%;
+  max-width: 520px;
+  min-height: 530px;   /* 🔥 fixed visual height */
+  background-color: #ffffff;
+  padding: 90px;
+  border-radius: 12px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+}
+
+
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(
+    to bottom,
+    #111111 0%,
+    #2b0000 25%,
+    #7a1e00 55%,
+    #ff3b00 100%
+  );
+}
+
+.register-title {
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  font-size: 28px;
+  letter-spacing: 1.5px;
+  margin-bottom: 30px;
+}
+
+.register-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 18px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.register-input:focus {
+  border-color: #d32f2f;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 1px;
+  background-color: #d32f2f;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-btn:hover {
+  background-color: #b71c1c;
+}
+
+.register-btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.register-footer {
+  margin-top: 22px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.register-footer a {
+  color: #d32f2f;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ================= BRAND TEXT LOGO ================= */
+
+.brand-logo {
+  font-family: "Oswald", sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: #ffffff;
+  cursor: default;
+}
+
+/* ================= NAVBAR RIGHT GROUP ================= */
+
+.navbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ================= AUTH BRAND (LOGIN / REGISTER) ================= */
+
+.auth-brand {
+  font-family: "Oswald", sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: #ffffff;
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+/* ================= AUTH WRAPPER ================= */
+
+.auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===== CONFIRM MODAL OVERLAY ===== */
+.confirm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* ===== CONFIRM BOX ===== */
+.confirm-box {
+  background: #1e1e1e;
+  padding: 30px;
+  border-radius: 12px;
+  width: 350px;
+  text-align: center;
+  border: 2px solid #ff6b2c;
+  box-shadow: 0 0 20px rgba(255, 107, 44, 0.4);
+}
+
+.confirm-box h3 {
+  margin-bottom: 10px;
+  color: #ff6b2c;
+}
+
+.confirm-box p {
+  margin-bottom: 25px;
+  color: #ddd;
+}
+
+/* ===== BUTTONS ===== */
+.confirm-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.confirm-yes,
+.confirm-no {
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.confirm-yes {
+  background-color: #ff6b2c;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.confirm-no {
+  background-color: #444;
+  color: white;
 }
 
-@keyframes App-logo-spin {
+.confirm-yes:hover {
+  background-color: #ff824d;
+}
+
+.confirm-no:hover {
+  background-color: #666;
+}
+
+
+/* ================= PAGINATION ================= */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.pagination button:hover:not(:disabled) {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+  transform: translateY(-2px);
+}
+
+/* Active page */
+.pagination .active-page {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+  font-weight: 600;
+}
+
+/* Disabled state */
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Optional: subtle shadow */
+.pagination button:not(:disabled) {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.orders-transition {
+  animation: fadeSlide 0.90s ease;
+}
+
+@keyframes fadeSlide {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(15px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+/* ===================================================== */
+/* ===================== MOBILE FIX ==================== */
+/* ===================================================== */
+
+@media (max-width: 768px) {
+
+  /* ================= PAGE ================= */
+
+  .page {
+    max-width: 100%;
+    padding: 50px 12px 20px;
+  }
+
+  h1,
+  h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  /* ================= NAVBAR ================= */
+/* ================= USER NAVBAR MOBILE ================= */
+
+.user-navbar {
+  padding: 10px 12px;
+}
+
+.user-navbar .navbar-links a {
+  font-size: 12px;
+  margin-right: 12px;
+}
+
+.user-navbar .brand-logo {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+  .brand-logo {
+    font-size: 14px;
+    letter-spacing: 1px;
+    white-space: nowrap;    /* 🔥 prevent YO CART split */
+  }
+
+  .logout-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+    white-space: nowrap;
+  }
+
+  .brand-logo {
+  display: inline-block;
+}
+
+/* ================= ADMIN NAVBAR MOBILE ================= */
+
+.admin-navbar {
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  overflow-x: auto;          /* enable scroll if overflow */
+  scrollbar-width: none;     /* hide scrollbar (Firefox) */
+}
+
+.admin-navbar::-webkit-scrollbar {
+  display: none;             /* hide scrollbar (Chrome) */
+}
+
+.admin-navbar .navbar-links {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;            /* prevent collapsing */
+}
+
+.admin-navbar .navbar-links a {
+  font-size: 10px;           /* reduced font */
+  margin-right: 8px;
+  white-space: nowrap;       /* prevent wrapping */
+}
+
+.admin-navbar .brand-logo {
+  font-size: 12px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.admin-navbar .navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+}
+
+
+
+/* ================= PRODUCTS MOBILE (BALANCED VERSION) ================= */
+
+.product-card.products-layout {
+  flex-direction: row;      
+  padding: 16px;            /* slightly bigger card */
+  gap: 16px;
+  height: auto;
+  min-height: 200px;        /* gives better visual balance */
+}
+
+/* LEFT SIDE */
+.product-left {
+  width: 110px;             /* little bigger */
+  align-items: center;
+}
+
+.product-image {
+  width: 105px;             /* slightly bigger image */
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.stock {
+  font-size: 11px;          /* reduced */
+  margin-bottom: 6px;
+}
+
+.user-qty {
+  gap: 6px;
+}
+
+.user-qty button {
+  padding: 3px 8px;
+  font-size: 11px;          /* reduced */
+}
+
+.user-qty strong {
+  font-size: 12px;          /* reduced */
+}
+
+/* RIGHT SIDE */
+.product-right {
+  flex: 1;
+}
+
+/* TITLE */
+.product-title {
+  font-size: 13px;          /* reduced more */
+  margin-bottom: 4px;
+}
+
+/* SPECS */
+.product-specs {
+  font-size: 10px;          /* smaller for compact look */
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+/* PRICE */
+.product-price-lg {
+  font-size: 13px;          /* reduced */
+  margin-bottom: 6px;
+}
+
+/* BUTTON */
+.add-cart-btn {
+  font-size: 11px;          /* reduced */
+  padding: 6px 12px;
+  width: auto;
+  width: 100%;     /* 🔥 force inside container */
+  max-width: 100%;
+}
+
+.product-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-right {
+  flex: 1;
+  min-width: 0;          /* 🔥 THIS FIXES FLEX OVERFLOW */
+}
+
+.product-title,
+.product-specs {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.product-color {
+  font-size: 11px;   /* smaller than product title */
+  font-weight: 400;
+}
+
+/* =====  MOBILE CART ===== */
+
+/* Shrink only the cart card */
+.cart-card {
+  padding: 10px 12px;   /* reduce internal spacing */
+  border-radius: 8px;   /* slightly tighter corners */
+  margin-bottom: 14px;  /* reduce space between cards */
+}
+
+.cart-row {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Break cart-left structure */
+/* Keep layout intact */
+.cart-left {
+  display: flex;
+  align-items: flex-start;  /* align with top of product name */
+  gap: 8px;
+}
+
+/* Move checkbox slightly down to match text baseline */
+.cart-checkbox {
+  flex-shrink: 0;
+}
+
+
+.cart-product-name {
+  display: inline-block;
+  font-size: 11px;
+  vertical-align: middle;
+}
+
+/* Qty centered separately */
+.qty-controls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+  margin-left: -30px;
+}
+
+/* Remove centered */
+.remove-btn {
+  display: block;
+  margin: 0 auto;
+  width: 45%;
+  font-size: 11px;
+}
+
+/* ================= ORDERS MOBILE MAX COMPACT ================= */
+
+.order-card {
+  padding: 10px;          /* very tight */
+  margin-bottom: 12px;
+}
+
+/* Main text */
+.order-card p {
+  font-size: 11px;
+  margin: 3px 0;
+  line-height: 1.3;
+}
+
+/* Labels */
+.order-card strong {
+  font-size: 11px;
+}
+
+/* Small/meta */
+.order-card .refund-status,
+.order-card .order-item,
+.order-card .order-total {
+  font-size: 9px;
+}
+
+/* Section spacing */
+.order-items,
+.order-total {
+  margin-top: 6px;
+  padding-top: 6px;
+}
+
+/* ================= CANCEL CONFIRM – MOBILE ================= */
+
+.confirm-box {
+  width: 260px;               /* shrink from 350px */
+  padding: 18px 20px;         /* reduce spacing */
+  border-radius: 8px;
+  border-width: 1px;          /* thinner border */
+}
+
+.confirm-box h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.confirm-box p {
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+
+.confirm-actions {
+  gap: 10px;
+}
+
+.confirm-yes,
+.confirm-no {
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+  /* ================= PAGINATION ================= */
+
+  .pagination button {
+    min-width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  
+  .register-card {
+    width: 92%;
+    max-width: 380px;     /* fixed clean mobile size */
+    min-height: 310px;     /* remove fixed desktop height */
+    padding: 28px 22px;   /* balanced padding */
+    border-radius: 10px;
+  }
+.login-card{
+    width: 92%;
+    max-width: 380px;     /* fixed clean mobile size */
+    min-height: 310px;     /* remove fixed desktop height */
+    padding: 50px 22px;   /* balanced padding */
+    border-radius: 10px;
+}
+  /* Logo */
+  .logo {
+    font-size: 15px;
+  }
+
+  .login-title,
+  .register-title {
+    font-size: 13px;      /* as requested */
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+  }
+
+  .login-input,
+  .register-input {
+    padding: 10px 12px;
+    font-size: 11px;      /* normal text size */
+    margin-bottom: 14px;
+  }
+
+  .login-btn,
+  .register-btn {
+    font-size: 11px;
+    padding: 10px;
+  }
+
+  .login-footer,
+  .register-footer {
+    font-size: 11px;
+    margin-top: 16px;
+  }
+
+  /* ================= ADMIN PRODUCTS – STOCK CONTROL FIX ================= */
+
+.admin-products-page .admin-stock-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-products-page .admin-stock-row strong {
+  font-size: 10px !important;
+}
+
+.admin-products-page .admin-stock-row button {
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+}
+
+.admin-products-page .admin-stock-row span {
+  font-size: 11px !important;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* ================= ADMIN REFUND – CANCEL BUTTON MOBILE ================= */
+
+.admin-refund-card .order-actions > button {
+  padding: 5px 10px;
+  font-size: 11px;
+  border-radius: 5px;
+}
+
+}
+
+
+/* ================= USER ORDERS STATUS COLORS (MOBILE) ================= */
+
+@media (max-width: 768px) {
+
+  /* Replacement Delivered – Blue */
+  .order-card .status-REPLACEMENT_DELIVERED {
+    color: #2196f3 !important;   /* same admin blue */
+  }
+
+  /* Returned – Purple */
+  .order-card .status-RETURNED {
+    color: #9c27b0 !important;
+  }
+
+  /* Payment Pending – Yellow */
+  .order-card .payment-status-PENDING {
+    color: #ff9800 !important;
+  }
+
+  /* Payment Paid / Refunded – Green */
+  .order-card .payment-status-PAID,
+  .order-card .payment-status-REFUNDED {
+    color: #4caf50 !important;
+  }
+
+  /* Return Completed – Green */
+  .order-card .return-COMPLETED {
+    color: #4caf50 !important;
+  }
+
+  /* Return Requested – Yellow */
+  .order-card .return-REQUESTED {
+    color: #ff9800 !important;
+  }
+
+  /* Return Reason – Red */
+  .order-card .return-reason {
+    color: #f44336 !important;
+  }
+
+
+/* ================= ADMIN ORDERS STATUS COLORS (MOBILE) ================= */
+
+
+/* Returned – Purple */
+  .admin-order-card .status-RETURNED {
+    color: #9c27b0 !important;
+  }
+
+  /* Replacement Delivered – Blue */
+  .admin-order-card .status-REPLACEMENT_DELIVERED {
+    color: #2196f3 !important;
+  }
+
+  /* Payment Pending – Yellow */
+  .admin-order-card .payment-status-PENDING {
+    color: #ff9800 !important;
+  }
+
+  /* Payment Paid – Green */
+  .admin-order-card .payment-status-PAID {
+    color: #4caf50 !important;
+  }
+
+  /* Payment Refunded – Green */
+  .admin-order-card .payment-status-REFUNDED {
+    color: #4caf50 !important;
+  }
+
+  /* Return Completed – Green */
+  .admin-order-card .return-COMPLETED {
+    color: #4caf50 !important;
+  }
+
+  /* Return Requested – Yellow */
+  .admin-order-card .return-REQUESTED {
+    color: #ff9800 !important;
+  }
+
+  /* Return Reason – Red */
+  .admin-order-card .return-reason {
+    color: #f44336 !important;
+  }
+
 }

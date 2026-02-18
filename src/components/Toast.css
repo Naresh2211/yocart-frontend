@@ -1,0 +1,106 @@
+/* FULL SCREEN OVERLAY */
+.toast-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+
+  /* 🔥 TOP-MIDDLE POSITION */
+  align-items: flex-start;
+  padding-top: 10px;
+
+  z-index: 2000;
+  pointer-events: none;
+}
+
+/* TOAST BOX */
+.toast {
+  min-width: 260px;
+  max-width: 420px;
+  padding: 14px 22px;
+  border-radius: 8px;
+
+  font-family: "Oswald", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  color: #fff;
+
+  animation: toastFadeTop 3s ease-in-out forwards;
+}
+
+/* TYPES */
+.toast-success {
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+}
+
+.toast-error {
+  background: linear-gradient(135deg, #c62828, #e53935);
+}
+
+.toast-warning {
+  background: linear-gradient(135deg, #ed6c02, #ff9800);
+}
+
+/* 🔥 TOP FADE ANIMATION */
+@keyframes toastFadeTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.95);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  85% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+}
+
+
+/* ===== MOBILE TOAST POSITION ===== */
+/* ===== MOBILE TOAST POSITION ===== */
+@media (max-width: 768px) {
+
+  .toast-overlay {
+    align-items: flex-start;
+    padding-top: 55px;
+  }
+
+   .toast {
+    min-width: 120px;          /* smaller width */
+    max-width: 150px;          /* reduce box size */
+    padding: 8px 14px;         /* tighter padding */
+    font-size: 11px;           /* smaller text */
+    border-radius: 6px;        /* slightly tighter corners */
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    animation: toastFadeTop 1.8s ease-in-out forwards;
+  }
+
+  @keyframes toastFadeTop {
+    0% {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.96);
+    }
+    15% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    70% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-6px) scale(0.96);
+    }
+  }
+
+}
+
+
